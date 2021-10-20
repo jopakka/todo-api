@@ -8,7 +8,7 @@ const addNote = async (text) => {
             'INSERT INTO note(content) VALUES(?)', [text]
         )
         const {affectedRows, ...rest} = rows
-        console.log('affectedRows: ', affectedRows)
+        console.log('affectedRows: ', {affectedRows})
         console.log('REST: ', rest)
         return rows
     } catch (e) {
