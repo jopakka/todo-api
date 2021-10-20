@@ -3,10 +3,11 @@ const router = express.Router()
 const notesController = require('../controllers/notesController')
 const {body, validationResult} = require('express-validator')
 
-const validateBody = (req, res) => {
+const validateBody = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty())
         return res.status(400).json({error: errors.array()})
+    next()
 }
 
 router.route('/')
