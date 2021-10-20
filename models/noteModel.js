@@ -7,10 +7,10 @@ const addNote = async (text) => {
         const [rows] = await promisePool.execute(
             'INSERT INTO note(content) VALUES(?)', [text]
         )
-        const {row, ...rest} = rows
-        console.log('ROW: ', row)
+        const {affectedRows, ...rest} = rows
+        console.log('affectedRows: ', affectedRows)
         console.log('REST: ', rest)
-        return
+        return rows
     } catch (e) {
         return jsonError()
     }
