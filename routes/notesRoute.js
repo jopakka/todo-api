@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const notesController = require('../controllers/notesController')
 const {body, param, validationResult} = require('express-validator')
+const {jsonError} = require('../utils/jsonMessages')
 
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty())
-        return res.status(400).json({errors: errors.array()})
+        return res.status(400).json(jsonError(errors.array()))
     next()
 }
 

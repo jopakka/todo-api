@@ -19,7 +19,7 @@ const getNote = async (id) => {
         const [rows] = await promisePool.execute(
             'SELECT * FROM note WHERE id = ?', [id]
         )
-        return rows[0] ? rows[0] :jsonError(`No note with id: ${id}`)
+        return rows[0] ? rows[0] : jsonError(`No note with id: ${id}`)
     }
     catch (e) {
         return jsonError()

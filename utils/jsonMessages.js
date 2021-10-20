@@ -1,8 +1,18 @@
-const jsonError = (text = "Error happened") => {
-    return {error: text}
+/**
+ *
+ * @param data {string, Array}
+ * @return {{error}}
+ */
+const jsonError = (data = 'Error happened') => {
+    return {error: data}
 }
 
-const jsonSuccess = (data = "") => {
+/**
+ *
+ * @param data {string}
+ * @return {{success}}
+ */
+const jsonSuccess = (data) => {
     return {success: data}
 }
 
