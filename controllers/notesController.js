@@ -22,7 +22,7 @@ const deleteNote = async (req, res) => {
 }
 
 const updateNote = async (req, res) => {
-    const note = await noteModel.updateNote(req.body.id, req.body.content)
+    const note = await noteModel.updateNote(req.params.id, req.body.content)
     if(note['error'])
         return res.status(400).json(note)
     res.status(200).json(note)
