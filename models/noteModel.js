@@ -9,6 +9,7 @@ const addNote = async (text) => {
         console.log('ROWS: ' + rows)
         return {rows}
     } catch (e) {
+        console.error(e)
         return {error: e.message}
     }
 }
