@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const itemsRoute = require('./routes/items')
+const notesRoute = require('./routes/notesRoute')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 if(process.env.NODE_ENV === 'production')
@@ -9,4 +9,4 @@ if(process.env.NODE_ENV === 'production')
 else
     require('./localhost')(app, process.env.HTTP_PORT)
 
-app.use('/items', itemsRoute)
+app.use('/notes', notesRoute)
