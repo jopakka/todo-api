@@ -1,15 +1,14 @@
 const pool = require('../database/db')
 const promisePool = pool.promise()
-const {jsonError} = require('../utils/jsonMessages')
+const {jsonError, jsonSuccess} = require('../utils/jsonMessages')
 
 const addNote = async (text) => {
     try {
         const [rows] = await promisePool.execute(
             'INSERT INTO note(content) VALUES(?)', [text]
         )
-        const {affectedRows} = rows
-        console.log('affectedRows: ', affectedRows)
-        return affectedRows
+        const {insertId} = rows
+        return await getNote(insertId)
     } catch (e) {
         return jsonError()
     }
@@ -32,7 +31,10 @@ const deleteNote = async (id) => {
         const [rows] = await promisePool.execute(
             'DELETE note FROM note WHERE id = ?', [id]
         )
-        return rows
+        const {affectedRows} = rows
+        return affectedRows !== 0
+            ? jsonSuccess(`Note with id: ${id} deleted successfully`)
+            : jsonError()
     }
     catch (e) {
         return jsonError()
@@ -44,7 +46,8 @@ const updateNote = async (id, text) => {
         const [rows] = await promisePool.execute(
             'UPDATE note SET content = ? WHERE id = ?', [text, id]
         )
-        return rows
+        const {affectedRows} = rows
+        return affectedRows !== 0 ? await getNote(id) : jsonError()
     }
     catch (e) {
         return jsonError()
