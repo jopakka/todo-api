@@ -34,7 +34,7 @@ const deleteNote = async (id) => {
         const {affectedRows} = rows
         return affectedRows !== 0
             ? jsonSuccess(`Note with id: ${id} deleted successfully`)
-            : jsonError()
+            : jsonError(`No note with id: ${id}`)
     }
     catch (e) {
         return jsonError()
