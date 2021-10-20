@@ -3,16 +3,28 @@ const promisePool = pool.promise()
 
 const addNote = async (text) => {
     try {
-        const [rows] = promisePool.execute(
+        const [rows] = await promisePool.execute(
             'INSERT INTO note(content) VALUES(?)', [text]
         )
-        return {rows}
+        return rows
     } catch (e) {
-        console.error(e)
+        return {error: e.message}
+    }
+}
+
+const getNote = async (id) => {
+    try {
+        const [rows] = await promisePool.execute(
+            'SELECT * FROM note WHERE id = ?', [id]
+        )
+        return rows[0] ?? {error: `No note with id: ${id}`}
+    }
+    catch (e) {
         return {error: e.message}
     }
 }
 
 module.exports = {
-    addNote
+    addNote,
+    getNote
 }

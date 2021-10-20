@@ -1,20 +1,27 @@
 const express = require('express')
 const router = express.Router()
 const notesController = require('../controllers/notesController')
-const {body, validationResult} = require('express-validator')
+const {body, param, validationResult} = require('express-validator')
 
-const validateBody = (req, res, next) => {
+const validate = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty())
-        return res.status(400).json({error: errors.array()})
+        return res.status(400).json({errors: errors.array()})
     next()
 }
 
 router.route('/')
     .post(
         body('content').not().isEmpty().trim().escape(),
-        validateBody,
+        validate,
         notesController.addNote
+    )
+
+router.route('/:id')
+    .get(
+        param('id').isInt(),
+        validate,
+        notesController.getNote
     )
 
 module.exports = router
