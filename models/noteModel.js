@@ -37,8 +37,21 @@ const deleteNote = async (id) => {
     }
 }
 
+const updateNote = async (id, text) => {
+    try {
+        const [rows] = await promisePool.execute(
+            'UPDATE note SET content = ? WHERE id = ?', [text, id]
+        )
+        return rows
+    }
+    catch (e) {
+        return jsonError()
+    }
+}
+
 module.exports = {
     addNote,
     getNote,
-    deleteNote
+    deleteNote,
+    updateNote
 }
