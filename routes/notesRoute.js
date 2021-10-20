@@ -23,5 +23,10 @@ router.route('/:id')
         validate,
         notesController.getNote
     )
+    .delete(
+        param('id').trim().isInt().escape(),
+        validate,
+        notesController.deleteNote
+    )
 
 module.exports = router

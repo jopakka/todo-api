@@ -11,10 +11,18 @@ const getNote = async (req, res) => {
     const note = await noteModel.getNote(req.params.id)
     if(note['error'])
         return res.status(400).json(note)
-    res.status(201).json(note)
+    res.status(200).json(note)
+}
+
+const deleteNote = async (req, res) => {
+    const note = await noteModel.getNote(req.params.id)
+    if(note['error'])
+        return res.status(400).json(note)
+    res.status(200).json(note)
 }
 
 module.exports = {
     addNote,
-    getNote
+    getNote,
+    deleteNote
 }
