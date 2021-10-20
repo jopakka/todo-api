@@ -16,6 +16,12 @@ router.route('/')
         validate,
         notesController.addNote
     )
+    .put(
+        body('id').trim().isInt().escape(),
+        body('content').not().isEmpty().trim().escape(),
+        validate,
+        notesController.updateNote
+    )
 
 router.route('/:id')
     .get(
@@ -27,12 +33,6 @@ router.route('/:id')
         param('id').trim().isInt().escape(),
         validate,
         notesController.deleteNote
-    )
-    .put(
-        body('id').trim().isInt().escape(),
-        body('content').not().isEmpty().trim().escape(),
-        validate,
-        notesController.updateNote
     )
 
 module.exports = router
