@@ -47,7 +47,7 @@ const updateNote = async (id, text) => {
             'UPDATE note SET content = ? WHERE id = ?', [text, id]
         )
         const {affectedRows} = rows
-        return affectedRows !== 0 ? await getNote(id) : jsonError()
+        return affectedRows !== 0 ? await getNote(id) : jsonError(`No note with id: ${id}`)
     }
     catch (e) {
         return jsonError()
