@@ -1,13 +1,13 @@
 const pool = require('../database/db')
 const promisePool = pool.promise()
-const {jsonError} = require('../utils/jsonMessages')
+const {jsonError, jsonSuccess} = require('../utils/jsonMessages')
 
 const addNote = async (text) => {
     try {
         const [rows] = await promisePool.execute(
             'INSERT INTO note(content) VALUES(?)', [text]
         )
-        return rows
+        return jsonSuccess(rows)
     } catch (e) {
         return jsonError()
     }
