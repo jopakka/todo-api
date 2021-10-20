@@ -19,7 +19,7 @@ router.route('/')
 
 router.route('/:id')
     .get(
-        param('id').isInt(),
+        param('id').trim().isInt().escape(),
         validate,
         notesController.getNote
     )
