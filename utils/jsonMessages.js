@@ -1,16 +1,18 @@
 /**
+ * Error json object.
  *
  * @param data {string, Array}
- * @return {{error}}
+ * @return {Object}
  */
 const jsonError = (data = 'Error happened') => {
     return {error: data}
 }
 
 /**
+ * Success json object.
  *
  * @param data {string}
- * @return {{success}}
+ * @return {Object}
  */
 const jsonSuccess = (data) => {
     return {success: data}

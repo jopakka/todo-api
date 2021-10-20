@@ -1,5 +1,11 @@
 const noteModel = require('../models/noteModel')
 
+/**
+ *
+ * @param req
+ * @param res
+ * @return {Promise<*>}
+ */
 const addNote = async (req, res) => {
     const note = await noteModel.addNote(req.body.content)
     if(note['error'])

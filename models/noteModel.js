@@ -2,6 +2,12 @@ const pool = require('../database/db')
 const promisePool = pool.promise()
 const {jsonError, jsonSuccess} = require('../utils/jsonMessages')
 
+/**
+ * Adds new note to database.
+ *
+ * @param text {String} Content for note
+ * @return {getNote|jsonError} Created note or error object
+ */
 const addNote = async (text) => {
     try {
         const [rows] = await promisePool.execute(
@@ -14,6 +20,12 @@ const addNote = async (text) => {
     }
 }
 
+/**
+ * Get note with ID.
+ *
+ * @param id {number} ID of note
+ * @return {Object|jsonError} Note object or error object
+ */
 const getNote = async (id) => {
     try {
         const [rows] = await promisePool.execute(
@@ -26,6 +38,12 @@ const getNote = async (id) => {
     }
 }
 
+/**
+ * Deletes note with ID.
+ *
+ * @param id {number} ID of note
+ * @return {jsonSuccess|jsonError} Success object or error object
+ */
 const deleteNote = async (id) => {
     try {
         const [rows] = await promisePool.execute(
@@ -41,6 +59,13 @@ const deleteNote = async (id) => {
     }
 }
 
+/**
+ * Updates note with given ID.
+ *
+ * @param id {number} ID of note
+ * @param text {string} New content for note
+ * @return {getNote|jsonError} Updated note or error object
+ */
 const updateNote = async (id, text) => {
     try {
         const [rows] = await promisePool.execute(
