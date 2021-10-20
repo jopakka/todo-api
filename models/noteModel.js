@@ -6,6 +6,7 @@ const addNote = async (content) => {
         const [rows] = promisePool.execute(
             'INSERT INTO note(content) VALUES(?)', [content]
         )
+        console.log('ROWS: ' + rows)
         return {rows}
     } catch (e) {
         return {error: e.message}
